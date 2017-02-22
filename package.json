@@ -1,0 +1,17 @@
+{
+  "dependencies": {},
+  "description": "BDD style assertions for node and the browser.",
+  "devDependencies": {
+    "mocha": "*",
+    "serve": "*"
+  },
+  "homepage": "https://github.com/LearnBoost/expect.js",
+  "maintainers": [
+    {
+      "name": "rauchg",
+      "email": "rauchg@gmail.com"
+    }
+  ],
+  "name": "wonder-expect.js",
+  "version": "0.1.0"
+}
