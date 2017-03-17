@@ -306,17 +306,6 @@
     return this;
   };
 
-  /*!
-   add by wonder
-   */
-    Assertion.prototype.gte = function (n) {
-        this.assert(
-            this.obj >= n
-            , function(){ return 'expected ' + i(this.obj) + ' to be >= ' + n }
-            , function(){ return 'expected ' + i(this.obj) + ' to be < ' + n });
-        return this;
-    };
-
   /**
    * Assert numeric value below _n_.
    *
@@ -332,17 +321,6 @@
       , function(){ return 'expected ' + i(this.obj) + ' to be above ' + n });
     return this;
   };
-
-  /*!
-   add by wonder
-   */
-    Assertion.prototype.lte = function (n) {
-        this.assert(
-            this.obj <= n
-            , function(){ return 'expected ' + i(this.obj) + ' to be <= ' + n }
-            , function(){ return 'expected ' + i(this.obj) + ' to be > ' + n });
-        return this;
-    };
 
   /**
    * Assert string value matches _regexp_.
@@ -516,6 +494,66 @@
     this.assert(false, error, error);
     return this;
   };
+
+
+
+
+
+
+
+    /**
+     * extend by wonder
+     */
+
+    Assertion.prototype.lte = function (n) {
+        this.assert(
+            this.obj <= n
+            , function(){ return 'expected ' + i(this.obj) + ' to be <= ' + n }
+            , function(){ return 'expected ' + i(this.obj) + ' to be > ' + n });
+        return this;
+    };
+
+    Assertion.prototype.gte = function (n) {
+        this.assert(
+            this.obj >= n
+            , function(){ return 'expected ' + i(this.obj) + ' to be >= ' + n }
+            , function(){ return 'expected ' + i(this.obj) + ' to be < ' + n });
+        return this;
+    };
+
+
+    Assertion.prototype.exist = function () {
+        this.assert(
+            this.obj !== null && this.obj !== undefined
+            , function(){ return 'expected ' + i(this.obj) + ' to be exist' }
+            , function(){ return 'expected ' + i(this.obj) + ' to not exist' });
+        return this;
+    };
+
+    Assertion.prototype.true = function () {
+        this.assert(
+            this.obj === true
+            , function(){ return 'expected ' + i(this.obj) + ' to be true' }
+            , function(){ return 'expected ' + i(this.obj) + ' to be false' });
+        return this;
+    };
+
+    Assertion.prototype.false = function () {
+        this.assert(
+            this.obj === true
+            , function(){ return 'expected ' + i(this.obj) + ' to be false' }
+            , function(){ return 'expected ' + i(this.obj) + ' to be true' });
+        return this;
+    };
+
+
+
+
+
+
+
+
+
 
   /**
    * Function bind implementation.
