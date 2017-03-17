@@ -306,6 +306,17 @@
     return this;
   };
 
+  /*!
+   add by wonder
+   */
+    Assertion.prototype.gte = function (n) {
+        this.assert(
+            this.obj >= n
+            , function(){ return 'expected ' + i(this.obj) + ' to be >= ' + n }
+            , function(){ return 'expected ' + i(this.obj) + ' to be < ' + n });
+        return this;
+    };
+
   /**
    * Assert numeric value below _n_.
    *
@@ -321,6 +332,17 @@
       , function(){ return 'expected ' + i(this.obj) + ' to be above ' + n });
     return this;
   };
+
+  /*!
+   add by wonder
+   */
+    Assertion.prototype.lte = function (n) {
+        this.assert(
+            this.obj <= n
+            , function(){ return 'expected ' + i(this.obj) + ' to be <= ' + n }
+            , function(){ return 'expected ' + i(this.obj) + ' to be > ' + n });
+        return this;
+    };
 
   /**
    * Assert string value matches _regexp_.
@@ -642,7 +664,7 @@
       if (isDate(value) && $keys.length === 0) {
         return stylize(value.toUTCString(), 'date');
       }
-      
+
       // Error objects can be shortcutted
       if (value instanceof Error) {
         return stylize("["+value.toString()+"]", 'Error');
