@@ -6,7 +6,7 @@
    * Exports.
    */
 
-  module.exports = expect;
+  module.exports.expect = expect;
   expect.Assertion = Assertion;
 
   /**
@@ -1340,7 +1340,9 @@
   })();
 
   if ('undefined' != typeof window) {
-    window.expect = module.exports;
+      if(!window.expect){
+          window.expect = module.exports.expect;
+      }
   }
 
 })(
