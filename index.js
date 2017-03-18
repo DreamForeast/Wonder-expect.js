@@ -6,7 +6,14 @@
    * Exports.
    */
 
+    /**
+     * modify by wonder
+     */
   module.exports.expect = expect;
+
+
+
+
   expect.Assertion = Assertion;
 
   /**
@@ -505,6 +512,18 @@
      * extend by wonder
      */
 
+
+    function addProperty(name, fn) {
+        Object.defineProperty(Assertion.prototype, name, {
+            get: function addProperty() {
+                return fn.call(this);
+            },
+            configurable: true
+        });
+    }
+
+
+
     Assertion.prototype.lte = function (n) {
         this.assert(
             this.obj <= n
@@ -522,29 +541,29 @@
     };
 
 
-    Assertion.prototype.exist = function () {
+    addProperty("exist",  function () {
         this.assert(
             this.obj !== null && this.obj !== undefined
             , function(){ return 'expected ' + i(this.obj) + ' to be exist' }
             , function(){ return 'expected ' + i(this.obj) + ' to not exist' });
         return this;
-    };
+    });
 
-    Assertion.prototype.true = function () {
+    addProperty("true",  function () {
         this.assert(
             this.obj === true
             , function(){ return 'expected ' + i(this.obj) + ' to be true' }
             , function(){ return 'expected ' + i(this.obj) + ' to be false' });
         return this;
-    };
+    });
 
-    Assertion.prototype.false = function () {
+    addProperty("false",  function () {
         this.assert(
             this.obj === true
             , function(){ return 'expected ' + i(this.obj) + ' to be false' }
             , function(){ return 'expected ' + i(this.obj) + ' to be true' });
         return this;
-    };
+    });
 
 
 
@@ -1340,6 +1359,9 @@
   })();
 
   if ('undefined' != typeof window) {
+      /**
+       * modify by wonder
+       */
       if(!window.expect){
           window.expect = module.exports.expect;
       }
