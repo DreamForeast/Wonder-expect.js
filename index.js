@@ -559,7 +559,7 @@
 
     addProperty("false",  function () {
         this.assert(
-            this.obj === true
+            this.obj === false
             , function(){ return 'expected ' + i(this.obj) + ' to be false' }
             , function(){ return 'expected ' + i(this.obj) + ' to be true' });
         return this;

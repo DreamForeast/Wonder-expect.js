@@ -1,6 +1,6 @@
 {
   "name": "wonder-expect.js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "dependencies": {},
   "description": "BDD style assertions for node and the browser.",
   "devDependencies": {
