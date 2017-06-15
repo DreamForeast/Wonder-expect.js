@@ -21,7 +21,7 @@ export class Assertion {
     get true() {
         var source = ExpectData.source;
 
-        this._assert(!!source === true, this._buildFailMsg("true"));
+        this._assert(!!source === true, "true");
 
         return this;
     }
@@ -29,7 +29,7 @@ export class Assertion {
     get false() {
         var source = ExpectData.source;
 
-        this._assert(!!source === false, this._buildFailMsg("false"));
+        this._assert(!!source === false, "false");
 
         return this;
     }
@@ -37,7 +37,7 @@ export class Assertion {
     get exist() {
         var source = ExpectData.source;
 
-        this._assert(source !== null && source !== void 0, this._buildFailMsg("exist"));
+        this._assert(source !== null && source !== void 0, "exist");
 
         return this;
     }
@@ -45,7 +45,7 @@ export class Assertion {
     public equal(n: number) {
         var source = ExpectData.source;
 
-        this._assert(source === n, this._buildFailMsg("equal", n));
+        this._assert(source === n, "equal", n);
 
         return this;
     }
@@ -53,7 +53,7 @@ export class Assertion {
     public gt(n: number) {
         var source = ExpectData.source;
 
-        this._assert(source > n, this._buildFailMsg(">", n));
+        this._assert(source > n, ">", n);
 
         return this;
     }
@@ -61,7 +61,7 @@ export class Assertion {
     public gte(n: number) {
         var source = ExpectData.source;
 
-        this._assert(source >= n, this._buildFailMsg(">=", n));
+        this._assert(source >= n, ">=", n);
 
         return this;
     }
@@ -69,7 +69,7 @@ export class Assertion {
     public lt(n: number) {
         var source = ExpectData.source;
 
-        this._assert(source < n, this._buildFailMsg("<", n));
+        this._assert(source < n, "<", n);
 
         return this;
     }
@@ -77,7 +77,7 @@ export class Assertion {
     public lte(n: number) {
         var source = ExpectData.source;
 
-        this._assert(source <= n, this._buildFailMsg("<=", n));
+        this._assert(source <= n, "<=", n);
 
         return this;
     }
@@ -87,16 +87,16 @@ export class Assertion {
 
         switch (type) {
             case "number":
-                this._assert(JudgeUtils.isNumber(source), this._buildFailMsg("number"));
+                this._assert(JudgeUtils.isNumber(source), "number");
                 break;
             case "array":
-                this._assert(JudgeUtils.isArrayExactly(source), this._buildFailMsg("array"));
+                this._assert(JudgeUtils.isArrayExactly(source), "array");
                 break;
             case "boolean":
-                this._assert(JudgeUtils.isBoolean(source), this._buildFailMsg("boolean"));
+                this._assert(JudgeUtils.isBoolean(source), "boolean");
                 break;
             case "string":
-                this._assert(JudgeUtils.isStringExactly(source), this._buildFailMsg("string"));
+                this._assert(JudgeUtils.isStringExactly(source), "string");
                 break;
             default:
                 break;
@@ -111,22 +111,27 @@ export class Assertion {
         return `expected ${this._format(ExpectData.source)} to be ${operationStr}`;
     }
 
-    private _assert(passCondition: boolean, failMsg: string) {
+    private _assert(passCondition: boolean, failMsg: string, target?:any) {
         var pass: boolean = null,
-            failMessage = failMsg;
+            failMessage:string = null;
 
         if (ExpectData.isNot) {
             pass = !passCondition;
-            ExpectData.isNot = false;
-
-            failMessage = failMessage.replace("to be", "not to be");
         }
         else {
             pass = passCondition;
         }
 
         if (pass) {
+            ExpectData.isNot = false;
             return;
+        }
+
+        failMessage = this._buildFailMsg(failMsg, target);
+
+        if (ExpectData.isNot) {
+            ExpectData.isNot = false;
+            failMessage = failMessage.replace("to be", "not to be");
         }
 
         throw new Error(failMessage);

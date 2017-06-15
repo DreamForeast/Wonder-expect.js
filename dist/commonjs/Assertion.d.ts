@@ -12,6 +12,6 @@ export declare class Assertion {
     lte(n: number): this;
     a(type: string): void;
     private _buildFailMsg(operationStr, target?);
-    private _assert(passCondition, failMsg);
+    private _assert(passCondition, failMsg, target?);
     private _format(source);
 }

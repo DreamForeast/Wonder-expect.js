@@ -27,7 +27,7 @@ var Assertion = (function () {
     Object.defineProperty(Assertion.prototype, "true", {
         get: function () {
             var source = ExpectData_1.ExpectData.source;
-            this._assert(!!source === true, this._buildFailMsg("true"));
+            this._assert(!!source === true, "true");
             return this;
         },
         enumerable: true,
@@ -36,7 +36,7 @@ var Assertion = (function () {
     Object.defineProperty(Assertion.prototype, "false", {
         get: function () {
             var source = ExpectData_1.ExpectData.source;
-            this._assert(!!source === false, this._buildFailMsg("false"));
+            this._assert(!!source === false, "false");
             return this;
         },
         enumerable: true,
@@ -45,7 +45,7 @@ var Assertion = (function () {
     Object.defineProperty(Assertion.prototype, "exist", {
         get: function () {
             var source = ExpectData_1.ExpectData.source;
-            this._assert(source !== null && source !== void 0, this._buildFailMsg("exist"));
+            this._assert(source !== null && source !== void 0, "exist");
             return this;
         },
         enumerable: true,
@@ -53,43 +53,43 @@ var Assertion = (function () {
     });
     Assertion.prototype.equal = function (n) {
         var source = ExpectData_1.ExpectData.source;
-        this._assert(source === n, this._buildFailMsg("equal", n));
+        this._assert(source === n, "equal", n);
         return this;
     };
     Assertion.prototype.gt = function (n) {
         var source = ExpectData_1.ExpectData.source;
-        this._assert(source > n, this._buildFailMsg(">", n));
+        this._assert(source > n, ">", n);
         return this;
     };
     Assertion.prototype.gte = function (n) {
         var source = ExpectData_1.ExpectData.source;
-        this._assert(source >= n, this._buildFailMsg(">=", n));
+        this._assert(source >= n, ">=", n);
         return this;
     };
     Assertion.prototype.lt = function (n) {
         var source = ExpectData_1.ExpectData.source;
-        this._assert(source < n, this._buildFailMsg("<", n));
+        this._assert(source < n, "<", n);
         return this;
     };
     Assertion.prototype.lte = function (n) {
         var source = ExpectData_1.ExpectData.source;
-        this._assert(source <= n, this._buildFailMsg("<=", n));
+        this._assert(source <= n, "<=", n);
         return this;
     };
     Assertion.prototype.a = function (type) {
         var source = ExpectData_1.ExpectData.source;
         switch (type) {
             case "number":
-                this._assert(es2015_1.JudgeUtils.isNumber(source), this._buildFailMsg("number"));
+                this._assert(es2015_1.JudgeUtils.isNumber(source), "number");
                 break;
             case "array":
-                this._assert(es2015_1.JudgeUtils.isArrayExactly(source), this._buildFailMsg("array"));
+                this._assert(es2015_1.JudgeUtils.isArrayExactly(source), "array");
                 break;
             case "boolean":
-                this._assert(es2015_1.JudgeUtils.isBoolean(source), this._buildFailMsg("boolean"));
+                this._assert(es2015_1.JudgeUtils.isBoolean(source), "boolean");
                 break;
             case "string":
-                this._assert(es2015_1.JudgeUtils.isStringExactly(source), this._buildFailMsg("string"));
+                this._assert(es2015_1.JudgeUtils.isStringExactly(source), "string");
                 break;
             default:
                 break;
@@ -101,18 +101,22 @@ var Assertion = (function () {
         }
         return "expected " + this._format(ExpectData_1.ExpectData.source) + " to be " + operationStr;
     };
-    Assertion.prototype._assert = function (passCondition, failMsg) {
-        var pass = null, failMessage = failMsg;
+    Assertion.prototype._assert = function (passCondition, failMsg, target) {
+        var pass = null, failMessage = null;
         if (ExpectData_1.ExpectData.isNot) {
             pass = !passCondition;
-            ExpectData_1.ExpectData.isNot = false;
-            failMessage = failMessage.replace("to be", "not to be");
         }
         else {
             pass = passCondition;
         }
         if (pass) {
+            ExpectData_1.ExpectData.isNot = false;
             return;
+        }
+        failMessage = this._buildFailMsg(failMsg, target);
+        if (ExpectData_1.ExpectData.isNot) {
+            ExpectData_1.ExpectData.isNot = false;
+            failMessage = failMessage.replace("to be", "not to be");
         }
         throw new Error(failMessage);
     };
