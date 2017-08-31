@@ -111,9 +111,9 @@ export class Assertion {
         return `expected ${this._format(ExpectData.source)} to be ${operationStr}`;
     }
 
-    private _assert(passCondition: boolean, failMsg: string, target?:any) {
+    private _assert(passCondition: boolean, failMsg: string, target?: any) {
         var pass: boolean = null,
-            failMessage:string = null;
+            failMessage: string = null;
 
         if (ExpectData.isNot) {
             pass = !passCondition;

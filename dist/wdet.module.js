@@ -922,5 +922,5 @@ var _initData = function () {
 };
 _initData();
 
-export { Assertion, expect, ExpectData };
+export { Assertion, ExpectData, expect };
 //# sourceMappingURL=wdet.module.js.map

@@ -929,8 +929,8 @@
 	_initData();
 
 	exports.Assertion = Assertion;
-	exports.expect = expect;
 	exports.ExpectData = ExpectData;
+	exports.expect = expect;
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 

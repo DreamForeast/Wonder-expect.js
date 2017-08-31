@@ -1,1 +1,3 @@
-export var expect: (source: any) => any;
+declare module "wonder-expect.js" {
+    export function expect(target?: any): any;
+}
