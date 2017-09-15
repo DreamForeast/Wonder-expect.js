@@ -42,6 +42,22 @@ export class Assertion {
         return this;
     }
 
+    get null() {
+        var source = ExpectData.source;
+
+        this._assert(source === null, "null");
+
+        return this;
+    }
+
+    get undefined() {
+        var source = ExpectData.source;
+
+        this._assert(source === void 0, "undefined");
+
+        return this;
+    }
+
     public equal(n: number) {
         var source = ExpectData.source;
 

@@ -35,6 +35,35 @@ describe("expect", function() {
                 et("aaa").exist;
             }).not.toThrow();
         });
+        it("null", function(){
+            errMsg = "to be null";
+
+            expect(function () {
+                et(undefined).null;
+            }).toThrow(errMsg);
+
+            expect(function () {
+                et(null).null;
+            }).not.toThrow(errMsg);
+        });
+        it("undefined", function(){
+            errMsg = "to be undefined";
+
+            expect(function () {
+                et(true).undefined;
+            }).toThrow();
+
+            expect(function () {
+                et(1).undefined;
+            }).toThrow();
+            expect(function () {
+                et(null).undefined;
+            }).toThrow(errMsg);
+
+            expect(function () {
+                et(undefined).undefined;
+            }).not.toThrow(errMsg);
+        });
         it("not", function () {
             errMsg = "not to be";
 
