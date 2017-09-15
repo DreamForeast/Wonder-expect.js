@@ -51,6 +51,24 @@ var Assertion = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Assertion.prototype, "null", {
+        get: function () {
+            var source = ExpectData_1.ExpectData.source;
+            this._assert(source === null, "null");
+            return this;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Assertion.prototype, "undefined", {
+        get: function () {
+            var source = ExpectData_1.ExpectData.source;
+            this._assert(source === void 0, "undefined");
+            return this;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Assertion.prototype.equal = function (n) {
         var source = ExpectData_1.ExpectData.source;
         this._assert(source === n, "equal", n);

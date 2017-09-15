@@ -5,6 +5,8 @@ export declare class Assertion {
     readonly true: this;
     readonly false: this;
     readonly exist: this;
+    readonly null: this;
+    readonly undefined: this;
     equal(n: number): this;
     gt(n: number): this;
     gte(n: number): this;
