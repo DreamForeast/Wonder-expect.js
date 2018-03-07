@@ -2,7 +2,7 @@
   "name": "wonder-expect.js",
   "authors": "Yuanchao Yang <395976266@qq.com>",
   "license": "MIT",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "main": "./dist/wdet.js",
   "typings": "./dist/wdet.d.ts",
   "description": "BDD style assertions for wonder.js",
